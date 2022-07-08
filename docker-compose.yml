@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: nginx:1.16.0
+    volumes:
+      - ./logs:/var/log/nginx
+      - ./html:/usr/share/nginx/html
+      - ../math_presos/html:/usr/share/nginx/math_html
+      - ./nginx-conf:/etc/nginx
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    ports:
+      - 8080:80
+
+

@@ -1,1 +1,131 @@
-this is from a nginx server inside a docker container
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style>
+      h3 {
+	  line-height: 2;
+      }
+      p.h4 {
+	  line-height: 1.8;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div class="container" id="main">
+
+      <h1 id="booktitle"></h1>
+
+      
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+     <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+ <script type="text/javascript">
+   $(function() {
+       var urlParams = new URLSearchParams(window.location.search);
+       var book = urlParams.get("book");
+       var ch = urlParams.get("ch");
+
+       var books = ["創世記",
+		    "出埃及記",
+		    "利未記",
+		    "民數記",
+		    "申命記",
+		    "約書亞記",
+		    "士師記",
+		    "路得記",
+		    "撒母耳記上",
+		    "撒母耳記下",
+		    "列王記上",
+		    "列王記下",
+		    "歷代志上",
+		    "歷代志下",
+		    "以斯拉記",
+		    "尼希米記",
+		    "以斯帖記",
+		    "約伯記",
+		    "詩篇",
+		    "箴言",
+		    "傳道書",
+		    "雅歌",
+		    "以賽亞書",
+		    "耶利米書",
+		    "耶利米哀歌",
+		    "以西結書",
+		    "但以理書",
+		    "何西阿書",
+		    "約珥書",
+		    "阿摩司書",
+		    "俄巴底亞書",
+		    "約拿書",
+		    "彌迦書",
+		    "那鴻書",
+		    "哈巴谷書",
+		    "西番雅書",
+		    "哈該書",
+		    "撒迦利亞書",
+		    "瑪拉基書",
+		    "馬太福音",
+		    "馬可福音",
+		    "路加福音",
+		    "約翰福音",
+		    "使徒行傳",
+		    "羅馬書",
+		    "哥林多前書",
+		    "哥林多後書",
+		    "加拉太書",
+		    "以弗所書",
+		    "腓立比書",
+		    "哥羅西書",
+		    "帖撒羅尼迦前書",
+		    "帖撒羅尼迦後書",
+		    "提摩太前書",
+		    "提摩太後書",
+		    "提多書",
+		    "腓利門書",
+		    "希伯來書",
+		    "雅各書",
+		    "彼得前書",
+		    "彼得後書",
+		    "約翰一書",
+		    "約翰二書",
+		    "約翰三書",
+		    "猶大書",
+		    "啟示錄"];
+
+       
+       var booktitle = books[parseInt(book) - 1];
+       $("#booktitle").text(booktitle + " " + ch);
+       
+       $.get("https://getbible.net/v2/cut/"+book+"/" + ch +".json", function(data) {
+		data.verses.forEach(function (item, index) {
+		    console.log(item);
+		    $("#main").append("<p class=h4><span class=nr><font color=red>"+ item.verse +" </font></span>"+ item.text+"</p>");
+		});
+	    });
+	    	 
+        });
+    </script>
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+  </body>
+</html>
